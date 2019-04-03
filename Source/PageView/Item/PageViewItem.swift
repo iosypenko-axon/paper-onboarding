@@ -78,13 +78,13 @@ extension PageViewItem {
         self.circleLayer = circleLayer
 
         // add constraints
-        [NSLayoutConstraint.Attribute.centerX, NSLayoutConstraint.Attribute.centerY].forEach { attribute in
+        [NSLayoutAttribute.centerX, NSLayoutAttribute.centerY].forEach { attribute in
             (self, view) >>>- {
                 $0.attribute = attribute
                 return
             }
         }
-        [NSLayoutConstraint.Attribute.height, NSLayoutConstraint.Attribute.width].forEach { attribute in
+        [NSLayoutAttribute.height, NSLayoutAttribute.width].forEach { attribute in
             view >>>- {
                 $0.attribute = attribute
                 return
@@ -113,7 +113,7 @@ extension PageViewItem {
         addSubview(imageView)
 
         // add constraints
-        [NSLayoutConstraint.Attribute.left, NSLayoutConstraint.Attribute.right, NSLayoutConstraint.Attribute.top, NSLayoutConstraint.Attribute.bottom].forEach { attribute in
+        [NSLayoutAttribute.left, NSLayoutAttribute.right, NSLayoutAttribute.top, NSLayoutAttribute.bottom].forEach { attribute in
             (self, imageView) >>>- { $0.attribute = attribute; return }
         }
         
@@ -131,7 +131,7 @@ extension PageViewItem {
             $0.duration = duration
             $0.toValue = path.cgPath
             $0.isRemovedOnCompletion = false
-            $0.fillMode = .forwards
+            $0.fillMode = kCAFillModeForwards
         }
         return animation
     }
@@ -141,14 +141,14 @@ extension PageViewItem {
             $0.duration = duration
             $0.toValue = toColor.cgColor
             $0.isRemovedOnCompletion = false
-            $0.fillMode = .forwards
-            $0.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+            $0.fillMode = kCAFillModeForwards
+            $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
         }
         return animation
     }
 
     fileprivate func imageAlphaAnimation(_ toValue: CGFloat, duration: Double) {
-        UIView.animate(withDuration: duration, delay: 0, options: UIView.AnimationOptions(), animations: {
+        UIView.animate(withDuration: duration, delay: 0, options: UIViewAnimationOptions(), animations: {
             self.imageView?.alpha = toValue
         }, completion: nil)
     }

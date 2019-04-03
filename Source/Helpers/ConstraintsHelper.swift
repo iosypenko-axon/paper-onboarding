@@ -9,11 +9,11 @@
 import UIKit
 
 struct ConstraintInfo {
-    var attribute: NSLayoutConstraint.Attribute = .left
-    var secondAttribute: NSLayoutConstraint.Attribute = .notAnAttribute
+    var attribute: NSLayoutAttribute = .left
+    var secondAttribute: NSLayoutAttribute = .notAnAttribute
     var constant: CGFloat = 0
     var identifier: String?
-    var relation: NSLayoutConstraint.Relation = .equal
+    var relation: NSLayoutRelation = .equal
 }
 
 precedencegroup constOp {

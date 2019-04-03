@@ -64,7 +64,7 @@ extension OnboardingContentView {
         view.addSubview(contentView)
 
         // add constraints
-        for attribute in [NSLayoutConstraint.Attribute.left, NSLayoutConstraint.Attribute.right, NSLayoutConstraint.Attribute.top] {
+        for attribute in [NSLayoutAttribute.left, NSLayoutAttribute.right, NSLayoutAttribute.top] {
             (view, contentView) >>>- { $0.attribute = attribute; return }
         }
         (view, contentView) >>>- {

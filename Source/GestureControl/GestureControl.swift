@@ -9,7 +9,7 @@
 import UIKit
 
 protocol GestureControlDelegate: class {
-    func gestureControlDidSwipe(_ direction: UISwipeGestureRecognizer.Direction)
+    func gestureControlDidSwipe(_ direction: UISwipeGestureRecognizerDirection)
 }
 
 class GestureControl: UIView {
@@ -34,7 +34,7 @@ class GestureControl: UIView {
 
         view.addSubview(self)
         // add constraints
-        for attribute: NSLayoutConstraint.Attribute in [.left, .right, .top, .bottom] {
+        for attribute: NSLayoutAttribute in [.left, .right, .top, .bottom] {
             (view, self) >>>- {
                 $0.attribute = attribute
                 return

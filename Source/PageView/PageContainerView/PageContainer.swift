@@ -82,7 +82,8 @@ extension PageContrainer {
         item.tag = tag
         addConstraintsToView(item, radius: selectedRadius)
         items.append(item)
-
+        
+        guard count != 0 else { return items }
         for _ in 1 ..< count {
             tag += 1
             let nextItem = createItem(radius, selectedRadius: selectedRadius, itemColor: itemColor(tag - 1))
@@ -105,11 +106,11 @@ extension PageContrainer {
     }
 
     fileprivate func addConstraintsToView(_ item: UIView, radius: CGFloat) {
-        [NSLayoutConstraint.Attribute.left, NSLayoutConstraint.Attribute.centerY].forEach { attribute in
+        [NSLayoutAttribute.left, NSLayoutAttribute.centerY].forEach { attribute in
             (self, item) >>>- { $0.attribute = attribute; return }
         }
 
-        [NSLayoutConstraint.Attribute.width, NSLayoutConstraint.Attribute.height].forEach { attribute in
+        [NSLayoutAttribute.width, NSLayoutAttribute.height].forEach { attribute in
             item >>>- {
                 $0.attribute = attribute
                 $0.constant = radius * 2.0
@@ -127,7 +128,7 @@ extension PageContrainer {
             $0.constant = space
             return
         }
-        [NSLayoutConstraint.Attribute.width, NSLayoutConstraint.Attribute.height].forEach { attribute in
+        [NSLayoutAttribute.width, NSLayoutAttribute.height].forEach { attribute in
             item >>>- {
                 $0.attribute = attribute
                 $0.constant = radius * 2.0

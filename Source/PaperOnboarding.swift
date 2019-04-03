@@ -165,7 +165,9 @@ extension PaperOnboarding {
         })
 
         pageView.configuration = { [weak self] item, index in
-            item.imageView?.image = self?.itemsInfo?[index].pageIcon
+            if let items = self?.itemsInfo, items.count > index {
+                item.imageView?.image = items[index].pageIcon
+            }
         }
 
         return pageView
@@ -190,10 +192,10 @@ extension PaperOnboarding {
 extension PaperOnboarding {
 
     fileprivate func backgroundColor(_ index: Int) -> UIColor {
-        guard let color = itemsInfo?[index].color else {
-            return .black
+        if let items = itemsInfo, items.count > index {
+            return items[index].color
         }
-        return color
+        return .clear
     }
 }
 
@@ -201,11 +203,11 @@ extension PaperOnboarding {
 
 extension PaperOnboarding: GestureControlDelegate {
 
-    func gestureControlDidSwipe(_ direction: UISwipeGestureRecognizer.Direction) {
+    func gestureControlDidSwipe(_ direction: UISwipeGestureRecognizerDirection) {
         switch direction {
-        case UISwipeGestureRecognizer.Direction.right:
+        case UISwipeGestureRecognizerDirection.right:
             currentIndex(currentIndex - 1, animated: true)
-        case UISwipeGestureRecognizer.Direction.left:
+        case UISwipeGestureRecognizerDirection.left:
             currentIndex(currentIndex + 1, animated: true)
         default:
             fatalError()
@@ -218,7 +220,10 @@ extension PaperOnboarding: GestureControlDelegate {
 extension PaperOnboarding: OnboardingContentViewDelegate {
 
     func onboardingItemAtIndex(_ index: Int) -> OnboardingItemInfo? {
-        return itemsInfo?[index]
+        if let items = itemsInfo, items.count > index {
+            return items[index]
+        }
+        return nil
     }
 
     @objc func onboardingConfigurationItem(_ item: OnboardingContentViewItem, index: Int) {

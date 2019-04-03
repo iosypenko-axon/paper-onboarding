@@ -29,7 +29,7 @@ extension FillAnimationView {
         view.addSubview(animationView)
 
         // add constraints
-        [NSLayoutConstraint.Attribute.left, .right, .top, .bottom].forEach { attribute in
+        for attribute in [NSLayoutAttribute.left, NSLayoutAttribute.right, NSLayoutAttribute.top, NSLayoutAttribute.bottom] {
             (view, animationView) >>>- { $0.attribute = attribute; return }
         }
 
@@ -74,9 +74,9 @@ extension FillAnimationView: CAAnimationDelegate {
             $0.duration = duration
             $0.toValue = path.cgPath
             $0.isRemovedOnCompletion = false
-            $0.fillMode = .forwards
+            $0.fillMode = kCAFillModeForwards
             $0.delegate = self
-            $0.timingFunction = CAMediaTimingFunction(name: .easeIn)
+            $0.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
         }
         return animation
     }
